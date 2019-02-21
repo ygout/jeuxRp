@@ -8,15 +8,18 @@ namespace jeuxRp
 {
     public class EasyMonster : Monster
     {
-
         public override void Attack(Joueur joueur)
         {
-            throw new NotImplementedException();
+            if (this.ThrowDice() > joueur.ThrowDice())
+            {
+                joueur.DamageSuffered(_degat);
+            }
         }
 
-        public override int ThrowDice()
+        public override void DamageSuffered()
         {
-            throw new NotImplementedException();
+            isAlive = false;
         }
+
     }
 }

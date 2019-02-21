@@ -9,7 +9,6 @@ namespace jeuxRp
     public class Joueur
     {
         private int _healthPoint;
-        private bool _isAlive;
 
         public int healthPoint
         {
@@ -20,23 +19,40 @@ namespace jeuxRp
         {
             get
             {
-                return _isAlive;
+                return _healthPoint > 0;
             }
         }
 
-        public Joueur()
+        public Joueur(int healthPoint)
         {
-            _healthPoint = 150;
+            _healthPoint = healthPoint;
         }
 
-        public void Attack()
+        public void Attack(Monster monster)
         {
+            int joueurThrow = this.ThrowDice();
+            int monsterThrow = this.ThrowDice();
 
+            if (joueurThrow >= monsterThrow)
+            {
+                monster.DamageSuffered();
+            }
         }
 
         public void DamageSuffered(int damageSuffered)
         {
+            if(!IsShieldWorking())
+                _healthPoint -= damageSuffered;
+        }
 
+        private bool IsShieldWorking()
+        {
+            return this.ThrowDice() <= 2;
+        }
+
+        public int ThrowDice()
+        {
+            return De.Rolled();
         }
     }
 }

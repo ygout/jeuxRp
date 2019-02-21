@@ -8,10 +8,11 @@ namespace jeuxRp
 {
     public abstract class Monster
     {
-        protected int degats;
+        protected const int _degat = 10;
+
         public bool isAlive
         {
-            get; private set;
+            get; protected set;
         }
 
         public Monster()
@@ -20,6 +21,10 @@ namespace jeuxRp
         }
         public abstract void Attack(Joueur joueur);
         public abstract void DamageSuffered();
-        public abstract int ThrowDice();
+
+        public int ThrowDice()
+        {
+            return De.Rolled();
+        }
     }
 }
